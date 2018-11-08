@@ -3,6 +3,9 @@
 namespace App\Helpers;
 
 use App\Api\SuperApi;
+use App\Services\SuperService;
+use App\Observers\InstagramObserver;
+use App\Observers\VkObserver;
 
 class SuperHelper {
 
@@ -10,8 +13,14 @@ class SuperHelper {
     public static $args;
     public static $verb;
 
-    public static function route($request = 'index')
+    public static $config;
+
+
+
+
+    public static function route($request = 'index', $config)
     {
+        self::$config = $config;
 
         if(stripos($request, 'api/v1/') !== false) {
             $request = str_replace('api/v1/', '', $request);
@@ -93,14 +102,15 @@ class SuperHelper {
     }
 
 
-
-
-
-
-
     public function index()
     {
-        return self::layout('index');
+        $service = SuperService::getInstance();
+        $service->registerObserver(new InstagramObserver(self::$config));
+        $service->registerObserver(new VkObserver(self::$config));
+        $posts = $service->getPostsObservers();
+        return self::layout('index', [
+            'posts' => $posts
+        ]);
     }
 
     public function all()

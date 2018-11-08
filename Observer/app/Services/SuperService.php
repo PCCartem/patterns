@@ -32,4 +32,22 @@ class SuperService implements Service {
             $observer->notify();
         }
     }
+
+    public function getPostsObservers()
+    {
+        $posts = [];
+        foreach ($this->observers as $observer) {
+            $obsPosts = $observer->getPosts();
+            foreach ($obsPosts as $obsPost) {
+                $posts[] = $obsPost;
+            }
+        }
+        usort($posts, function ($a, $b) {
+            if ((int)$a['timestamp'] == (int)$b['timestamp']) {
+                return 0;
+            }
+            return ((int)$a['timestamp'] > (int)$b['timestamp']) ? -1 : 1;
+        });
+        return $posts;
+    }
 }
