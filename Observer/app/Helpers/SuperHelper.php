@@ -24,7 +24,7 @@ class SuperHelper {
 
         if(stripos($request, 'api/v1/') !== false) {
             $request = str_replace('api/v1/', '', $request);
-            self::toApi($request);
+            self::toApi($request, $config);
         }
 
         self::$args = explode('/', rtrim($request, '/'));
@@ -42,7 +42,7 @@ class SuperHelper {
 
     }
 
-    public static function toApi($request)
+    public static function toApi($request, $config)
     {
 
         if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
@@ -50,7 +50,7 @@ class SuperHelper {
         }
 
         try {
-            $api = new SuperApi($request, $_SERVER['HTTP_ORIGIN']);
+            $api = new SuperApi($request, $config);
             echo $api->processApi();
         } catch (Exception $e) {
             echo json_encode(Array('error' => $e->getMessage()));

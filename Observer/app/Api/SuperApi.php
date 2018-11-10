@@ -1,13 +1,18 @@
 <?php
 
 namespace App\Api;
+use App\Services\SuperService;
+use App\Observers\InstagramObserver;
+use App\Observers\VkObserver;
 
 class SuperApi extends AbstractApi{
-    //TODO: Перепишу-ка я авторизацию.
-    protected $User = 1;
 
-    public function __construct($request, $origin) {
+    public $config;
+
+    public function __construct($request, $config) {
+        header('Access-Control-Allow-Origin: *');
         parent::__construct($request);
+        $this->config = $config;
 
         // Abstracted out for example
 //        $APIKey = new Models\APIKey();
@@ -24,13 +29,19 @@ class SuperApi extends AbstractApi{
 //        }
 
 //        $this->User = $User;
+
     }
 
     /**
      * //TODO: М подумаю как все таки контретные методы реализовать
      */
-    protected function index() {
-        return 132;
+    protected function posts() {
+        $service = SuperService::getInstance();
+        $service->registerObserver(new InstagramObserver( $this->config));
+        $service->registerObserver(new VkObserver( $this->config));
+        $posts = $service->getPostsObservers();
+
+        return $posts;
     }
 
     protected function example() {

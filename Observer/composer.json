@@ -11,6 +11,8 @@
             "App\\":"app/"
         }
     },
-    "description": "my mvc",
-    "require": {}
+    "description": "my observers",
+    "require": {
+        "firebase/php-jwt" : "*"
+    }
 }
