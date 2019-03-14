@@ -11,14 +11,18 @@ namespace App\Models;
 
 class Model
 {
-    protected $pdo = null;
+    protected static $pdo = null;
 
-
-    public function __construct($config)
+    public static function getConnect()
     {
-        if(is_null($this->pdo)) {
+        return self::$pdo;
+    }
+
+    public static function setConnect($config = [])
+    {
+        if(is_null(self::$pdo)) {
             try {
-                $this->pdo = new \PDO(
+                self::$pdo = new \PDO(
                     "{$config['adapter']}:host={$config['host']};dbname={$config['dbname']};charset=utf8",
                     $config['user'],
                     $config['pass']
@@ -27,6 +31,8 @@ class Model
                 die('Подключение не удалось: ' . $e->getMessage());
             }
 
+        } else {
+            return self::$pdo;
         }
     }
 }
