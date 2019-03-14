@@ -42,11 +42,11 @@ class View
         $content = $this->render($tmpPath, $data);
         $footer = $this->render('footer');
 
-        require_once( $this->render($this->getPathTpl('layout'), [
+        $this->render($this->getPathTpl('layout'), [
             'header' => $header,
             'content' => $content,
             'footer' => $footer
-        ]));
+        ]);
 
 
         echo ob_get_clean();
