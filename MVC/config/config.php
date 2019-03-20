@@ -3,9 +3,9 @@ return [
     'db' => [
         'host'=>'localhost',
         'adapter' => 'mysql',
-        'dbname' => 'soc',
+        'dbname' => 'test',
         'user' => 'root',
-        'pass' => 'wx22331233'
+        'pass' => ''
     ],
     'debug' => 'true'
 ];

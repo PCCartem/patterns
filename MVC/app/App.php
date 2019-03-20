@@ -5,20 +5,24 @@
 
 namespace App;
 
+use App\Core\Router;
 
+use App\Models\Model;
 use App\Controllers\MainController;
+
 
 class App
 {
     public function __construct($config)
     {
-        $connect = new Models\Model($config['db']);
+        Model::setConnect($config['db']);
     }
 
     public function run()
     {
-        $controller = new MainController();
-
-        return $controller->actionIndex();
+        Router::addRoute('GET', [
+            '/index' => 'App\Controllers\MainController:actionIndex'
+        ]);
+        return Router::dispatch();
     }
 }
