@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-use App\Core\Route;
 
 /**
  * Class Router
@@ -18,6 +17,7 @@ class Router
 
 
     /**
+     * @param string $type
      * @param array $route
      * @return bool
      */
@@ -29,45 +29,41 @@ class Router
 
 
     /**
-     * @param array $routes
+     * @return array
      */
     public static function getRoutes(): array
     {
         return self::$routes;
     }
 
-    /**
-     *
-     */
-    public static function dispatch()
-    {
-        foreach (self::$routes as $route) {
-            if (preg_match($route->getRegexp(), self::getCurrentUrl(), $params)) {
-                $params = is_array(array_shift($params)) ? $params : [];
-                return self::execute($route, $params);
-            } else {
-                //TODO: Exeptions
-                echo "404";
-            }
-        }
-    }
-
-    /**
-     * @param \App\Core\Route $route
-     * @param $params
-     */
-    public static function execute(Route $route, $params = [])
-    {
-        return call_user_func_array([$route->getObjectOfController(), $route->getAction()], $params);
-    }
 
     /**
      * @return mixed
      */
-    private static function getCurrentUrl()
+    public static function dispatch()
     {
-        return parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+
+        foreach (self::$routes as $route) {
+            if (preg_match($route->getRegexp(), Request::getCurrentUrl(), $attributeValues) && Request::getMethod() == $route->getType()) {
+                Request::setValueAttributes($route->getNameAttributes(), $attributeValues);
+                return self::execute($route);
+            };
+        }
+        echo 404;
+        return false;
     }
+
+
+    /**
+     * @param Route $route
+     * @return mixed
+     */
+    public static function execute(Route $route)
+    {
+        return call_user_func_array([$route->getObjectOfController(), $route->getAction()], []);
+    }
+
+
 
 
 }

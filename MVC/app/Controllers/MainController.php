@@ -1,16 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pccartem
- * Date: 11.08.18
- * Time: 1:33
- */
 
 namespace App\Controllers;
 
 
+/**
+ * Class MainController
+ * @package App\Controllers
+ */
 class MainController extends Controller
 {
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         return $this->layout('index');

@@ -5,10 +5,10 @@
 
 namespace App;
 
+use App\Core\Request;
 use App\Core\Router;
 
 use App\Models\Model;
-use App\Controllers\MainController;
 
 
 class App
@@ -16,12 +16,13 @@ class App
     public function __construct($config)
     {
         Model::setConnect($config['db']);
+        Request::init();
     }
 
     public function run()
     {
         Router::addRoute('GET', [
-            '/index' => 'App\Controllers\MainController:actionIndex'
+            '/<id:num>/<dd:num>' => 'App\Controllers\MainController:actionIndex'
         ]);
         return Router::dispatch();
     }
