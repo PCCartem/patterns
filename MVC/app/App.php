@@ -5,6 +5,7 @@
 
 namespace App;
 
+use App\Core\ExceptionBase;
 use App\Core\Request;
 use App\Core\Router;
 
@@ -21,9 +22,13 @@ class App
 
     public function run()
     {
-        Router::addRoute('GET', [
-            '/<id:num>/<dd:num>' => 'App\Controllers\MainController:actionIndex'
-        ]);
-        return Router::dispatch();
+        try {
+            Router::addRoute('GET', [
+                '/<id:num>/<dd:num>' => 'App\Controllers\MainController:actionIndex'
+            ]);
+            return Router::dispatch();
+        } catch (ExceptionBase $exception) {
+            return $exception->getMessage();
+        }
     }
 }

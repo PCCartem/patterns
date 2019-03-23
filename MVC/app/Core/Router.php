@@ -49,8 +49,7 @@ class Router
                 return self::execute($route);
             };
         }
-        echo 404;
-        return false;
+        throw new ExceptionBase('404', 404);
     }
 
 
