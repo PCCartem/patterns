@@ -6,4 +6,5 @@ Iterator/vendor
 CoR/vendor
 TemplateMethod/vendor
 Memento/vendor
+Visitor/vendor
 .idea
