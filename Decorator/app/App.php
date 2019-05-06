@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Core\ConcreteComponent;
-use App\Decorators\ConcreteDecoratorA;
-use App\Decorators\ConcreteDecoratorB;
+use App\Decorators\ConcreteFacadeA;
+use App\Decorators\ConcreteFacadeB;
 
 
 class App
@@ -16,8 +16,8 @@ class App
 
         echo "<br>";
 
-        $decorator1 = new ConcreteDecoratorA($simple);
-        $decorator2 = new ConcreteDecoratorB($decorator1);
+        $decorator1 = new ConcreteFacadeA($simple);
+        $decorator2 = new ConcreteFacadeB($decorator1);
         echo $decorator2->operation();
     }
 

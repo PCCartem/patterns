@@ -1,9 +1,9 @@
 <?php
 namespace App\Decorators;
 
-use App\Core\Decorator;
+use App\Core\Facade;
 
-class ConcreteDecoratorB extends Decorator
+class ConcreteFacadeB extends Facade
 {
 
     public function operation(): string
