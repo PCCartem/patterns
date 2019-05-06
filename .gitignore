@@ -7,4 +7,5 @@ CoR/vendor
 TemplateMethod/vendor
 Memento/vendor
 Visitor/vendor
+Adapter/vendor
 .idea
