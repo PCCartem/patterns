@@ -12,4 +12,5 @@ Bridge/vendor
 Composite/vendor
 Decorator/vendor
 Facade/vendor
+Proxy/vendor
 .idea
