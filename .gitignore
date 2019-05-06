@@ -8,4 +8,5 @@ TemplateMethod/vendor
 Memento/vendor
 Visitor/vendor
 Adapter/vendor
+Bridge/vendor
 .idea
