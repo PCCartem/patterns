@@ -13,4 +13,5 @@ Composite/vendor
 Decorator/vendor
 Facade/vendor
 Proxy/vendor
+FactoryMethod/vendor
 .idea
