@@ -1,0 +1,16 @@
+{
+    "name": "pccartem/test.loc",
+    "authors": [
+        {
+            "name": "PCCartem",
+            "email": "1.aaaaaa@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\":"app/"
+        }
+    },
+    "description": "my mvc",
+    "require": {}
+}
