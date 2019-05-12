@@ -3,24 +3,31 @@
 namespace App;
 
 
-
-
-use App\Core\ConcreteCreator1;
-use App\Core\ConcreteCreator2;
+use App\Core\ConcreteFactory1;
+use App\Core\ConcreteFactory2;
+use App\Interfaces\AbstractFactory;
 
 class App
 {
     public function run()
     {
+        echo "Client: Testing client code with the first factory type:\n";
+        $this->clientCode(new ConcreteFactory1());
 
-        $creator = new ConcreteCreator1();
-        echo "Client: I'm not aware of the creator's class, but it still works.\n"
-            . $creator->someOperation();
-        $creator = new ConcreteCreator2();
-        echo "Client: I'm not aware of the creator's class, but it still works.\n"
-            . $creator->someOperation();
+        echo "\n";
+
+        echo "Client: Testing the same client code with the second factory type:\n";
+        $this->clientCode(new ConcreteFactory2());
 
     }
 
+    public function clientCode(AbstractFactory $factory)
+    {
+        $productA = $factory->createProductA();
+        $productB = $factory->createProductB();
+
+        echo $productB->usefulFunctionB() . "\n";
+        echo $productB->anotherUsefulFunctionB($productA) . "\n";
+    }
 
 }

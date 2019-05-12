@@ -19,7 +19,7 @@ class App
         $creator = new ConcreteCreator2();
         echo "Client: I'm not aware of the creator's class, but it still works.\n"
             . $creator->someOperation();
-        
+
     }
 
 
